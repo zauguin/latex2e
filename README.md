@@ -1,5 +1,11 @@
 # The LaTeX2e Kernel Code Repository
 
+---
+
+This trial branch is for experimentation and not necessarily for integration into the core distribution (in particular it may not pass the test suite)
+
+---
+
 ## Overview
 
 This repository hosts development of the core LaTeX distribution, which
