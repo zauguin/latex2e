@@ -2775,22 +2775,18 @@
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-    \def\reserved@a#1{%
-      \def\@remove@tlig##1{\@remove@tlig@##1\@nil#1\@nil\relax}
-      \def\@remove@tlig@##1#1{\@remove@tlig@@##1}}
-    \edef\reserved@b{\detokenize{+tlig;}}
-    \expandafter\reserved@a\expandafter{\reserved@b}
-    \def\@remove@tlig@@#1\@nil#2\relax{#1}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-    \def\remove@tlig#1{%
-      \begingroup
-      \font\remove@tlig
-      \expandafter\@remove@tlig\expandafter{\fontname\font}%
-      \remove@tlig
-      \char#1\relax
-      \endgroup
+    \def\remove@tlig#1{\directlua{%
+      local n = node.new(29, 256)%
+      n.font,n.char=font.current(),token.scan_int()%
+      node.write(n)%
+    }#1\relax}
+    \def\do@subst@correction{%
+      \xdef\subst@correction{%
+         \font@name
+         \directlua{tex.definefont(true,token.scan_string(),font.current())}%
+           {\curr@fontshape/\f@size}%
+      }%
+      \aftergroup\subst@correction
     }
 %    \end{macrocode}
 %
