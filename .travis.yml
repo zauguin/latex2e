@@ -8,12 +8,3 @@ cache:
 
 script:
  - texlua build.lua check -q -H
-
-notifications:
-  email:
-    recipients:
-      - latex3-commits@tug.org
-    on_success: change
-    on_failure: always
-    on_start:   never
-
